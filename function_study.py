@@ -28,18 +28,32 @@ def draw_grouped_pie(df, category):  # 매개변수로 엑셀 데이터프레임
             weight='bold'
             )
         
+        colors = ["#FF8383","#FFF574","#A1D6CB",
+                  "#C0DEFF","#A19AD3", "#F3D1F4",
+                  "#FADFA1", "#B7C9F2","#F6FDC3"
+                  ]
+        
+        
+        # 이 리스트는 파이 차트에서 각 조각을 중심에서 얼마나 튀어나오게 할지 지정하는 용도
+        # 'data_df'의 행(row) 개수만큼 반복문을 수행하여 'explode' 리스트를 생성
+        # shape → (행 개수, 열 개수) 튜플 반환하여 행의 개수로 반복함
+        # 각 요소는 0.015로 설정됨
+        explode = list(0.015 for exp in range(data_df.shape[0]))
+
         plt.pie(
             # data_df 데이터프레임의 i번째 칼럼
             data_df[columns[i]],
             labels = data_df["분류"],   # data_df 데이터프레임의 분류 라벨 표시 (ex. 여자, 남자...)
             autopct = '%.1f%%',
-            startangle = 200,           
-            counterclock = False
+            startangle = 200,
+            counterclock = False,
+            colors = colors,
+            explode = explode,
+            radius = 0.9,
+            textprops={'color':"#303030", 'weight':'500'}
             )
-        # print(">>>>>", data_df[columns[i]])
-    
-    plt.tight_layout()
 
+    plt.tight_layout()
     plt.show()
 
 draw_grouped_pie(df, input_category)
