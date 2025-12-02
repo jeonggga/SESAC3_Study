@@ -36,23 +36,27 @@ question = """
 # 원하는 음료를 선택 받는 함수
 # -------------------------------------------
 def select_drink():
-    selected_num = int(input(question))
     drink = ""    # 조건문 결과로 선택될 음료 이름을 저장할 변수
+    while True:
+        try:
+            selected_num = int(input(question))
+        except ValueError:
+            print("숫자를 입력해주세요.")
+            continue    # 숫자가 아닌 입력이면 다시 입력 받기
+
+        if selected_num == 1:
+            drink = "americano"   # 입력 받은 숫자의 문자열을 변수 key에 대입한다.
+        elif selected_num == 2:
+            drink = "cafelatte" 
+        elif selected_num == 3:
+            drink = "matchalatte"
+        elif selected_num == 4:
+            drink = "chocolatte"
+        else:
+            print("잘못된 입력입니다. 다시 입력해주세요.")
+            continue    # 지정된 숫자가 아니면 다시 입력 받기
     
-    if selected_num == 1:
-        drink = "americano"   # 입력 받은 숫자의 문자열을 변수 key에 대입한다.
-    elif selected_num == 2:
-        drink = "cafelatte" 
-    elif selected_num == 3:
-        drink = "matchalatte"
-    elif selected_num == 4:
-        drink = "chocolatte"
-    else:
-        print("잘못된 입력입니다. 다시 입력해주세요.")
-        # 지정된 숫자 외 입력 시 이 함수를 다시 호출하여 input 실행 (재귀 함수 사용 / 조건문에서는 continue를 사용할 수 없어서)
-        return select_drink()
-    
-    return drink  # 선택한 음료 문자열, 정수 반환
+        return drink    # 올바른 입력이 들어오면 루프 종료 후 반환
 
 
 
@@ -60,24 +64,35 @@ def select_drink():
 # 결제 처리 함수
 # -------------------------------------------
 def pay(drink):
-    # 선택한 음료와 금액을 안내한 뒤 결제 금액 입력받기
-    input_pay = int(input(f"\n선택하신 메뉴: {drink}\n금액: {price[drink]}원\n결제 금액을 넣어주세요: ", ))
+    while True:    # 재귀 대신 반복문 사용 → 안정적
+        try:
+            # 선택한 음료와 금액을 안내한 뒤 결제 금액 입력받기
+            input_pay = int(input(f"\n선택하신 메뉴: {drink}\n금액: {price[drink]}원\n결제 금액을 넣어주세요: ", ))
 
-    # 충분한 금액이 들어오면 결제 완료
-    if input_pay >= price[drink]:
-        print("\n>>> 결제가 완료되었습니다.\n>>> 음료 제조를 시작합니다.\n")
+        except ValueError:  # 숫자가 아닌 입력 처리 가능
+            print("숫자를 입력해주세요.")
+            continue
+        
+        # 충분한 금액이 들어오면 결제 완료
+        if input_pay >= price[drink]:
+            print("\n>>> 결제가 완료되었습니다.\n>>> 음료 제조를 시작합니다.\n")
 
-        # 간단한 영수증 출력
-        print("================== 영수증 ==================")
-        print(f"주문 메뉴: {drink} --------------- {price[drink]}원")
-        print("--------------------------------------------")
-        print("주문해주셔서 감사합니다. 맛있는 하루되세요.\nWIFI 비밀번호는 12345입니다.")
-        print("============================================\n")
+            # 간단한 영수증 출력
+            print("================== 영수증 ==================")
+            print(f"주문 메뉴: {drink} --------------- {price[drink]}원")
+            print("--------------------------------------------")
+            print("주문해주셔서 감사합니다. 맛있는 하루되세요.\nWIFI 비밀번호는 12345입니다.")
+            print("============================================\n")
 
-    # 금액 부족 시 다시 결제 입력 받기
-    else:
-        print("금액이 부족합니다. 다시 시도해주세요.")
-        return pay(drink)
+            # 만약에 받은 금액이 음료 가격보다 크다면 잔돈 반환
+            if input_pay > price[drink]:
+                print(f"남은 잔돈: {input_pay - price[drink]}원\n남은 잔돈은 동전 반환구에 있습니다.\n")
+            
+            break  # 결제 완료되면 반복문 종료
+
+        # 금액 부족 시 다시 결제 입력 받기
+        else:
+            print("금액이 부족합니다. 다시 시도해주세요.")
     
     return drink
 
@@ -101,7 +116,7 @@ def continue_order():
         if input_order == "Y" or input_order == "y":
             return True
         elif input_order == "N" or input_order == "n":
-            print("주문이 종료되었습니다.")
+            print("주문이 종료되었습니다. 다음에 또 오세요!")
             return False
         else:
             print("잘못된 입력입니다. 다시 입력해주세요.")
