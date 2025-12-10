@@ -1,4 +1,6 @@
-from flask import Flask # Flask 모듈에서 Flask 클래스를 임포트합니다. 웹 애플리케이션 객체를 생성하는 데 사용됩니다.
+from flask import Flask, render_template, url_for
+# Flask 모듈에서 Flask 클래스를 임포트합니다. 웹 애플리케이션 객체를 생성하는 데 사용됩니다.
+
 app = Flask(__name__) # Flask 애플리케이션 객체를 생성합니다.
                       # '__name__'은 현재 모듈의 이름으로, Flask가 리소스(템플릿, 정적 파일)를 찾을 위치를 결정하는 데 도움을 줍니다.
                 
@@ -8,7 +10,7 @@ app = Flask(__name__) # Flask 애플리케이션 객체를 생성합니다.
                 # 사용자가 이 URL로 접근하면 바로 아래의 index 함수가 실행됩니다.
                 
 def index():
-    return 'Hi!!!' # 함수가 실행될 때 웹 브라우저에 'Hi!!!'라는 문자열을 응답으로 반환합니다.
+    return '기본 index.html 페이지입니다.' # 함수가 실행될 때 웹 브라우저에 'Hi!!!'라는 문자열을 응답으로 반환합니다.
 
 @app.route('/hello/<name>', # '/hello/' 뒤에 변수(variable part)를 포함하는 URL에 대한 라우트를 정의합니다.
                             # <name> 부분은 URL에서 추출되어 hello 함수의 인수로 전달됩니다.
@@ -18,6 +20,57 @@ def index():
                                         
 def hello(name): # 라우트에 연결된 뷰 함수입니다. URL에서 추출된 name 값이 인수로 전달됩니다.
     return f'Hello, World! {name}' # 전달받은 name 값을 포함하여 포맷팅된 문자열을 응답으로 반환합니다.
+
+
+
+@app.route("/name/<name>")
+
+def show_name(name):
+    # 변수를 템플릿 엔진에게 건넨다
+    return render_template("index.html", name=name)
+
+
+
+@app.route("/gugudan/<int:num>")
+
+def dan(num):
+    return render_template('gugudan.html', num=num)
+
+
+
+# @app.route("/gugudan/<int:num>")
+
+# def dan(num):
+#     title = f'{num}단'
+#     gugudan = []
+#     for n in range(1, 10):
+#         temp = num*n
+#         gugudan.append(f'<li>{num} x {n} = {temp}</li>')
+#     gugudan = "".join(gugudan)
+#     return f'''<!DOCTYPE html>
+# <html lang="ko">
+#     <head>
+#         <meta charset="UTF-8">
+#         <title>구구단 : {title}</title>
+#     </head>
+#     <body>
+#         <h1>{title}</h1>
+#             <ul>
+#                 {gugudan}
+#             </ul>
+#     </body>
+# </html>
+# '''
+
+
+
+# with app.test_request_context():
+#     print(url_for("index"))
+#     print(url_for("hello_endpoint",name="abc"))
+#     print(url_for("show_name",name="bbb"))
+#     print(url_for("dan_endpoint",num=2))
+
+
 
 
 # --- 라우트 정의 끝 ---
