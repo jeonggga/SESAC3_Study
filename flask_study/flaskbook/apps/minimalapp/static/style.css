@@ -45,32 +45,191 @@ table {
 
 
 
+
 /* 설정값 */
 body { 
-    text-align: center; 
     margin-top: 50px;
-    background-color:#e8edf1;
+    background-color:#ffffff;
 }
+
 h1 { 
-    font-size: 40px; 
-    font-weight: 700; 
-    color: #3498DB; 
+    font-size: 40px;
+    font-weight: 700;
+    color: #131313;
+    margin-bottom: 50px;
 }
+
+
+
+
+/* 구구단 */
+
+.gugudan_h1 {
+    margin-bottom: 30px;
+}
+
+.gugudan_input_button_div {
+    padding: 18px 0px 80px 0px;
+    display: flex; 
+}
+
 .gugu-list { 
     list-style: none; 
     padding: 0; 
     width: 200px; 
     margin: 20px auto; 
-    border: 1px solid #ddd;
+    border: 2px solid #131313;
     border-radius: 22px;
     background-color:#ffffff;
 }
+
 .gugu-list li { 
     padding: 18px; 
-    border-bottom: 1px dashed #eee; 
+    border-bottom: 1px dashed #a3a3a3; 
     font-size: 1.2em; 
 }
+
 .gugu-list li:last-child { 
     border-bottom: none; 
 }
 
+.gugudan_div {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 26px;
+    margin: 0 auto;
+}
+
+.gugudan_input {
+    color: var(--grey800);
+    background-color: #ffffff;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 12px 16px;
+    width: 100%;
+}
+
+.gugudan_button {
+    width: 160px;
+    padding: 15px;
+    background: #131313;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    transition: 0.2s;
+    margin-left: 12px;
+}
+
+
+
+
+/* 문의하기 */
+
+.contact_body {
+    padding: 20px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 1px auto 0;
+    line-height: 20px;
+    display: block;
+    border: 2px solid #131313;
+    border-radius: 10px;
+}
+
+.contact_input {
+    color: var(--grey800);
+    background-color: #ffffff;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 12px 16px;
+}
+
+.contact_div {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 26px;
+    margin: 0 auto;
+}
+
+.contact_complete_div {
+    width: 100%;
+    max-width: 600px;
+    padding: 100px 26px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    width: 100%;
+    padding: 8px 0;
+}
+
+.label_input_div {
+    padding: 18px 0;
+}
+
+textarea {
+    overflow: auto; /* 내용이 넘치면 스크롤 생김 */
+    resize: vertical; /* 세로만 늘릴 수 있음 */
+}
+
+.contact_textarea {
+    max-height: 234px;
+    min-height: 160px; /* 최소 높이 */
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #131313;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box; /* 패딩 + border 포함 */
+    font-family: "Segoe UI", sans-serif;
+}
+
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+.contact_button {
+    width: 160px;
+    padding: 15px;
+    background: #131313;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto 0;
+    transition: 0.2s;
+}
+
+
+
+
+/* flash */
+.flash {
+    color: rgb(255, 69, 69);
+}
