@@ -79,7 +79,7 @@ mail = Mail(app)
 # 사용자가 이 URL로 접근하면 바로 아래의 index 함수가 실행됩니다.
      
 def index():
-    return '기본 index.html 페이지입니다.'
+    return render_template("index.html")
 # 함수가 실행될 때 웹 브라우저에 'Hi!!!'라는 문자열을 응답으로 반환합니다.
 
 
@@ -93,20 +93,6 @@ def hello(name): # 라우트에 연결된 뷰 함수입니다. URL에서 추출�
     return f'Hello, World! {name}' # 전달받은 name 값을 포함하여 포맷팅된 문자열을 응답으로 반환합니다.
 
 
-
-
-
-
-# ----------------------------------------
-# /name/뒤에 글자를 넣으면 그 글자를 name이라는 변수로 받아서
-# index.html 파일에 보내주는 기능
-#
-# 예) /name/minsu  → name = "minsu"
-# ----------------------------------------
-@app.route("/name/<name>")
-def show_name(name):
-    # index.html 안에서 {{ name }} 으로 사용할 수 있게 넘겨줌
-    return render_template("index.html", name=name)
 
 
 
@@ -145,9 +131,6 @@ def dan():
         error_message=error_message
     )
 
-if __name__ == "__main__":
-    # 이 파일을 직접 실행하면 Flask 서버 실행
-    app.run(debug=True)
 
 
 
@@ -343,9 +326,11 @@ def admin(name):
 
 
 
-
 # --- 라우트 정의 끝 ---
-# 개발 서버를 실행합니다. 'port=8080'은 서버가 8080 포트에서 수신 대기하도록 지정합니다.
-app.run(port=8080, debug=True)
-# 디버그 모드를 활성화합니다.
-# 코드를 수정하고 저장하면 서버가 자동으로 재시작되며, 오류 발생 시 상세한 디버그 정보를 웹 페이지에 표시합니다.
+if __name__ == "__main__":
+    # 이 파일을 직접 실행하면 Flask 서버 실행
+
+    # 개발 서버를 실행합니다. 'port=8080'은 서버가 8080 포트에서 수신 대기하도록 지정합니다.
+    app.run(port=8080, debug=True)
+    # 디버그 모드를 활성화합니다.
+    # 코드를 수정하고 저장하면 서버가 자동으로 재시작되며, 오류 발생 시 상세한 디버그 정보를 웹 페이지에 표시합니다.

@@ -2,9 +2,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Name</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <title>안녕하세요!</title>
 </head>
 <body>
-    <h1>Name : {{ name }}</h1>
+    <div class="index_div">
+        <h1 class="index_h1">안녕하세요!<br>어떤 기능을 원하시나요?</h1>
+        <div class="a_inline">
+            <a href="/contact" class="index_a">문의하기</a>
+            <a href="/gugudan" class="index_a">구구단 보기</a>
+        </div>
+    </div>
 </body>
 </html>
