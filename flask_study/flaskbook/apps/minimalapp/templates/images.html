@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title>이미지 업로드</title>
+</head>
+<body>
+    <div class="images_div">
+        <div class="images_h1_a">
+            <h1 class="images_h1">이미지 업로드가 완료되었습니다!</h1>
+            <p class="images_p">업로드가 완료된 이미지 파일만 보여집니다. 추가로 업로드를 원하시면 아래 버튼을 눌러주세요.</p>
+            
+            <!-- 이미지 업로드 페이지로 이동 -->
+            <a href="{{ url_for('dt.upload') }}" class="images_a">이미지 추가하기</a>
+        </div>
+
+        <div>
+            <!-- 이미지 목록 헤더 (컬럼 제목) -->
+            <div class="images-list-header">
+                <span class="col-images">이미지</span>
+                <span class="col-filename">이름</span>
+                <span class="col-uploaded">업로드 시간</span>
+                <span class="col-modified">마지막 수정</span>
+                <span class="col-size">크기</span>
+                <span class="col-action"></span>
+            </div>
+
+            <!-- 업로드된 이미지 리스트 -->
+            {% for img in images %}
+            <div class="images-card">
+
+                <!-- 이미지 미리보기 -->
+                <span class="col-images">
+                    <img src="{{ url_for('dt.image_file', filename=img.filename) }}" alt="이미지" width="80">
+                </span>
+
+                <!-- 파일명 -->
+                <span class="col-filename">{{ img.filename }}</span>
+
+                <!-- 업로드 시간 -->
+                <span class="col-uploaded">{{ img.uploaded_at }}</span>
+
+                <!-- 마지막 수정 시간 -->
+                <span class="col-modified">{{ img.modified_at }}</span>
+
+                <!-- 파일 크기 (KB) -->
+                <span class="col-size">{{ img.size_kb }} KB</span>
+
+                <!-- 이미지 삭제 버튼 -->
+                <span class="col-action">
+                <!--
+                    삭제 요청은 POST 방식으로 처리
+                    (URL 직접 접근으로 삭제되는 것 방지)
+                -->
+                <form
+                    method="POST"
+                    action="{{ url_for('dt.delete_image', filename=img.filename) }}"
+                >
+                    <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+                </form>
+            </span>
+            </div>
+            {% endfor %}
+
+            <!-- 업로드된 이미지가 하나도 없을 경우 안내 메시지 표시 -->
+            {% if images|length == 0 %}
+                <p style="text-align: center; padding: 80px 0; color: rgb(126, 126, 126);">업로드된 이미지가 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

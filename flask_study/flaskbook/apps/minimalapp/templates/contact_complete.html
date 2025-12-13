@@ -8,12 +8,15 @@
 <body>
     <div class="contact_complete_div">
         <h1>문의 접수가 완료되었습니다!</h1>
+
         <!-- Flask에서 flash()로 보낸 메시지를 가져와서 messages에 저장 -->
         {% with messages = get_flashed_messages() %}
+
             <!-- 메시지가 하나라도 있으면 -->
             {% if messages %}
                 <ul>
                     {% for message in messages %}
+                    
                         <!-- 각 메시지를 <li> 항목으로 출력 -->
                         <li>{{ message }}</li>
                     {% endfor %}

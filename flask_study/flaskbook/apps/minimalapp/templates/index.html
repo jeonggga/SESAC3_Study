@@ -2,16 +2,30 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <title>안녕하세요!</title>
 </head>
 <body>
     <div class="index_div">
         <h1 class="index_h1">안녕하세요!<br>어떤 기능을 원하시나요?</h1>
         <div class="a_inline">
+            
+            <!-- 문의 페이지 이동 -->
             <a href="/contact" class="index_a">문의하기</a>
+
+            <!-- 구구단 페이지 이동 -->
             <a href="/gugudan" class="index_a">구구단 보기</a>
         </div>
+
+        <!-- Blueprint(dt)의 upload 라우트로 이동 -->
+        <a
+            href="{{ url_for('dt.upload') }}"
+            class="index_a2"
+        >
+            <!-- 신규 기능 강조 표시 -->
+            <span style="color: aquamarine; padding-right: 8px;">NEW</span>
+            이미지 업로드 하기
+        </a>
     </div>
 </body>
 </html>

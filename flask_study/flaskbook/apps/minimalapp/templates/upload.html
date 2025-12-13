@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title>이미지 업로드</title>
+</head>
+<body>
+    <div class="index_div">
+        <h1 class="upload_h1">이미지 업로드 하기</h1>
+        <p class="upload_p">업로드할 이미지를 선택해 주세요.</p>
+        <!--
+            이미지 업로드 폼
+            - method="POST" : 파일 업로드는 POST 방식 필수
+            - enctype="multipart/form-data" : 파일 전송을 위한 필수 설정
+            - novalidate : HTML 기본 유효성 검사를 끄고 Flask-WTF 검증 사용
+        -->
+        <form
+        action="{{ url_for('dt.upload') }}"
+        method="POST"
+        enctype="multipart/form-data"
+        novalidate="novalidate"
+        >
+        <!-- CSRF 공격 방지를 위한 토큰 -->
+        {{ form.csrf_token }}
+
+        <!-- 이미지 파일 선택 필드 -->
+        <div>
+            <label>
+                <span>
+                    <!-- Flask-WTF FileField 렌더링 -->
+                    {{ form.image(class="form-control-file") }}
+                </span>
+            </label>
+        </div>
+
+        <!-- 이미지 업로드 시 발생한 에러 메시지 출력 -->
+        {% for error in form.image.errors %}
+        <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+
+        <!-- 업로드 버튼 -->
+        <div>
+            <label>
+                {{ form.submit(class="btn btn-primary") }}
+            </label>
+        </div>
+    </form>
+    </div>
+</body>
+</html>
